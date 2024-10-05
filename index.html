@@ -318,5 +318,35 @@
             });
         });
     </script>
+    <script>
+      function updateVisibility() {
+          const navLinks = document.querySelectorAll('nav ul li');
+          const nav = document.querySelector('nav');
+          let totalWidth = 0;
+          let shouldHideAll = false;
+
+          // Calculate total width of all nav links
+          navLinks.forEach(link => {
+              totalWidth += link.offsetWidth;
+              if (totalWidth > nav.clientWidth) {
+                  shouldHideAll = true; // If any link exceeds the width, set flag to hide all
+              }
+          });
+
+          // Toggle visibility based on whether any item overflows
+          navLinks.forEach(link => {
+              if (shouldHideAll) {
+                  link.classList.remove('visible');
+              } else {
+                  link.classList.add('visible');
+              }
+          });
+      }
+
+      // Run the function on page load and window resize
+      window.addEventListener('load', updateVisibility);
+      window.addEventListener('resize', updateVisibility);
+    </script>
 </body>
+
 </html>

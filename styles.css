@@ -43,16 +43,23 @@ header {
 
 nav {
     margin-left: auto; /* Push nav to the right */
+    overflow: hidden; /* Hide overflowing content */
+    white-space: nowrap; /* Prevent the links from wrapping to the next line */
 }
 
 .nav-links {
     list-style: none;
     padding: 0;
+    display: flex; /* Flexbox layout for the links */
 }
 
 .nav-links li {
-    display: inline; /* Keeps list items inline */
     margin: 0 15px; /* Space between items */
+    visibility: hidden; /* Initially hidden */
+}
+
+.nav-links li.visible {
+    visibility: visible; /* Make visible when there’s enough space */
 }
 
 .nav-links li a {
