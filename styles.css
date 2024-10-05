@@ -124,7 +124,7 @@ footer {
 }
 
 /* Media Queries for Responsive Design */
-@media (max-width: 600px) {
+@media (max-width: 600px), (max-height: 600px) {
     .nav-links li {
         display: block; /* Stack links on smaller screens */
         margin: 10px 0; /* Add margin for spacing */
@@ -136,6 +136,11 @@ footer {
 
     section {
         margin: 10px; /* Reduce margin on smaller screens */
+    }
+
+    /* Hide h2 headers (like "About Us", "Careers") when screen is too small */
+    section h2 {
+        display: none; /* Hide the header titles */
     }
 }
 
