@@ -1,117 +1,322 @@
 <!DOCTYPE html>
-<html>
-<title>
-Xlayt
-</title>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xlayt</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Inline CSS for the SVG section */
+        body {
+            margin: 0;
+            font-family: 'Georgia', sans-serif;
+        }
+        svg {
+            background-color: black;
+            width: 100vw;
+            height: 400px; /* Increased height to add space for the buffer */
+            display: block;
+            margin: 0 auto;
+            position: relative; /* To ensure the text is positioned within the SVG */
+        }
+        circle {
+            fill: white;
+        }
+        line {
+            stroke: white;
+            stroke-width: 1;
+        }
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-179257122-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        /* Text container that will be on top of the SVG */
+        .centered-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centering horizontally and vertically */
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            font-size: 24px;
+            text-align: center;
+            border-radius: 8px;
+            pointer-events: none; /* Make sure the text does not block mouse events */
+            font-weight: bold; 
+        }
 
-  gtag('config', 'UA-179257122-1');
-</script>
+        /* Additional styles for layout */
+        header {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: black; /* Restored black background */
+            color: white;
+        }
+        .logo {
+            height: 120px; /* Adjust this value to control the logo size */
+            margin-right: 60px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
 
-<meta name="format-detection" content="telephone=no">
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
+        section {
+            padding: 5px 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: black;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-<div style="text-align:center;">
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:export-ydpi="96"
-   inkscape:export-xdpi="96"
-   inkscape:export-filename="C:\Users\tobias.franks\Desktop\xlayt.png"
-   sodipodi:docname="xlayt.svg"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-   id="svg8"
-   version="1.1"
-   viewBox="0 0 200 200"
-   height="200mm"
-   width="200mm">
-  <defs
-     id="defs2" />
-  <sodipodi:namedview
-     inkscape:window-maximized="0"
-     inkscape:window-y="1"
-     inkscape:window-x="2128"
-     inkscape:window-height="864"
-     inkscape:window-width="1261"
-     showgrid="false"
-     inkscape:document-rotation="0"
-     inkscape:current-layer="layer1"
-     inkscape:document-units="mm"
-     inkscape:cy="164.60203"
-     inkscape:cx="308.13374"
-     inkscape:zoom="0.49497475"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
-     pagecolor="#ffffff"
-     id="base" />
-  <metadata
-     id="metadata5">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     style="display:inline"
-     inkscape:label="Layer 2"
-     id="layer2"
-     inkscape:groupmode="layer">
-    <rect
-       y="7.4835467"
-       x="4.2763124"
-       height="180.13966"
-       width="192.43405"
-       id="rect19"
-       style="fill:#000000;stroke-width:0.264583" />
-    <rect
-       y="10.658545"
-       x="7.9804792"
-       height="172.9218"
-       width="184.99954"
-       id="rect21"
-       style="fill:#ffffff;stroke-width:0.536637" />
-  </g>
-  <g
-     style="display:inline"
-     id="layer1"
-     inkscape:groupmode="layer"
-     inkscape:label="Layer 1">
-    <text
-       id="text12"
-       y="53.656475"
-       x="15.538068"
-       style="font-size:50.8px;line-height:1.25;font-family:'Bookman Old Style';-inkscape-font-specification:'Bookman Old Style';stroke-width:0.264583;fill:#000000;"
-       xml:space="preserve"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.8px;font-family:Century;-inkscape-font-specification:Century;stroke-width:0.264583;fill:#000000;"
-         y="53.656475"
-         x="15.538068"
-         id="tspan10"
-         sodipodi:role="line">Xlayt</tspan></text>
-  </g>
-</svg>
-<p
-	style="font-size:28px;line-height:1.25;font-family:'Calibri Light';-inkscape-font-specification:'Calibri Light';stroke-width:0.264583;fill:#000000;">
-+61 406 590 164</p>
-</div>
+    <header>
+        <img src="logo.svg" alt="Xlayt Logo" class="logo">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#careers">Careers</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- SVG Animation Section -->
+    <div id="animation-container" style="position: relative;">
+        <svg id="interactiveSvg"></svg>
+        <!-- Text on top of SVG -->
+        <div class="centered-text">Compute-Native Trading</div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about">
+        <p>Xlayt is a proprietary trading firm driven by cutting-edge research and advanced technology. Our tech stack is meticulously designed to meet the high-performance demands of today’s markets, positioning us at the competitive edge of the industry. We combine technological innovation with deep market expertise to deliver exceptional returns for our clients.</p>
+        <br>
+        <hr class="section-divider">
+      </section>
+
+      <section id="careers">
+        <h2>Careers</h2>
+        <div class="job">
+            <div class="job-header">
+                <h3>Algorithm Developer</h3>
+                <span class="job-location">Dubai / Remote</span>
+            </div>
+            <p>We are looking for Algorithm Developers to research, develop and enhance trading algorithms using advanced statistical techniques and quantitative analysis. The ideal candidate will have experience in financial modeling and a strong background in C++/Python programming.</p>
+        </div>
+        <br>
+        <div class="job">
+            <div class="job-header">
+                <h3>CUDA Developer</h3>
+                <span class="job-location">Dubai / Remote</span>
+            </div>
+            <p>We are looking for CUDA Developers to optimize our trading systems for high-performance computing. The successful candidate will work on parallel computing solutions, leveraging GPU technology to improve execution speed and efficiency.</p>
+        </div>
+        <br>
+        <p>To apply, please send your resume to <a href="mailto:talent@xlayt.com">talent@xlayt.com</a>.</p>
+        <br>
+        <hr class="section-divider">
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: <a href="mailto:info@xlayt.com">info@xlayt.com</a></p>
+        <p>Phone: +1 (234) 567-890</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Xlayt LLP, All rights reserved.</p>
+    </footer>
+
+    <script>
+        const svg = document.getElementById('interactiveSvg');
+        const container = document.getElementById('animation-container');
+        const svgRect = svg.getBoundingClientRect();
+        const width = window.innerWidth;
+        const height = 400; // Match the increased SVG height
+
+        // Define buffer size at the top and bottom
+        const bufferSize = 50; // Buffer space of 50px at the top and bottom
+
+        // Grid dimensions and noise parameters
+        const rows = 10;
+        const cols = 20;
+        const pointRadius = 4;
+        const spacingX = 40; // Horizontal distance between points
+        const spacingY = (height - 2 * bufferSize) / (rows - 1); // Adjust spacing to fit between buffers
+        const noiseLevel = 10; // Max random noise to add to point positions
+        const maxAttractionDistance = 200; // Maximum distance a point can be attracted
+        const maxMovementDistance = 14; // Maximum amount a point can move
+        const returnSpeed = 0.05; // Speed at which points return to their original position (0 to 1 scale)
+
+        // Calculate total grid width and the horizontal offset to center the grid
+        const gridWidth = (cols - 1) * spacingX + spacingX / 2; // Include offset for staggered rows
+        const offsetX = (width - gridWidth) / 2;
+
+        // Random noise generator
+        function randomNoise() {
+            return (Math.random() - 0.5) * 2 * noiseLevel;
+        }
+
+        // Linear interpolation function for smooth movement
+        function lerp(start, end, t) {
+            return start + (end - start) * t;
+        }
+
+        // Create a grid of points
+        const points = [];
+        const lines = []; // Separate list to manage all lines
+
+        for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < cols; col++) {
+                // Offset every second row by half the spacing on the x-axis
+                const rowOffset = (row % 2 === 0) ? 0 : spacingX / 2;
+                const x = col * spacingX + rowOffset + offsetX + randomNoise();
+                const y = row * spacingY + bufferSize + randomNoise(); // Include buffer for the top
+
+                points.push({
+                    x: x,
+                    y: y,
+                    originalX: x,
+                    originalY: y,
+                    targetX: x,
+                    targetY: y,
+                    element: null
+                });
+            }
+        }
+
+        // Create point elements and lines
+        points.forEach((point, index) => {
+            // Create circles
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('cx', point.x);
+            circle.setAttribute('cy', point.y);
+            circle.setAttribute('r', pointRadius);
+            svg.appendChild(circle);
+            point.element = circle;
+
+            // Connect each point to its right neighbor (in the same row)
+            if ((index + 1) % cols !== 0) {
+                const rightNeighbor = points[index + 1];
+                // Create line to right neighbor
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', point.x);
+                line.setAttribute('y1', point.y);
+                line.setAttribute('x2', rightNeighbor.x);
+                line.setAttribute('y2', rightNeighbor.y);
+                svg.appendChild(line);
+                lines.push({ line: line, p1: point, p2: rightNeighbor });
+            }
+
+            // Connect each point to its bottom neighbor (in the next row)
+            if (index + cols < points.length) {
+                const bottomNeighbor = points[index + cols];
+                // Create line to bottom neighbor
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', point.x);
+                line.setAttribute('y1', point.y);
+                line.setAttribute('x2', bottomNeighbor.x);
+                line.setAttribute('y2', bottomNeighbor.y);
+                svg.appendChild(line);
+                lines.push({ line: line, p1: point, p2: bottomNeighbor });
+            }
+        });
+
+        // Function to limit the movement of points towards the mouse
+        function limitMovement(dx, dy) {
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance > maxMovementDistance) {
+                const scale = maxMovementDistance / distance;
+                return { dx: dx * scale, dy: dy * scale };
+            }
+            return { dx, dy };
+        }
+
+        // Function to update the positions of points and lines
+        function updatePoints() {
+            points.forEach((point) => {
+                // Smoothly transition back to the original position
+                point.x = lerp(point.x, point.targetX, returnSpeed);
+                point.y = lerp(point.y, point.targetY, returnSpeed);
+
+                // Update circle positions
+                point.element.setAttribute('cx', point.x);
+                point.element.setAttribute('cy', point.y);
+            });
+
+            // Update lines based on current point positions
+            lines.forEach((connection) => {
+                connection.line.setAttribute('x1', connection.p1.x);
+                connection.line.setAttribute('y1', connection.p1.y);
+                connection.line.setAttribute('x2', connection.p2.x);
+                connection.line.setAttribute('y2', connection.p2.y);
+            });
+
+            // Request the next animation frame for smooth updates
+            requestAnimationFrame(updatePoints);
+        }
+
+        // Start the update loop
+        updatePoints();
+
+        // Mouse move listener (on the whole container, including the text)
+        container.addEventListener('mousemove', (event) => {
+            const svgRect = svg.getBoundingClientRect(); // Get the SVG's position in the document
+            const mouseX = event.clientX - svgRect.left; // Adjust mouseX relative to SVG
+            const mouseY = event.clientY - svgRect.top; // Adjust mouseY relative to SVG
+
+            points.forEach((point) => {
+                const dx = mouseX - point.originalX;
+                const dy = mouseY - point.originalY;
+                const distanceToMouse = Math.sqrt(dx * dx + dy * dy);
+
+                // Only attract points within a certain distance from the mouse
+                if (distanceToMouse < maxAttractionDistance) {
+                    const limitedMovement = limitMovement(dx, dy);
+                    point.targetX = point.originalX + limitedMovement.dx;
+                    point.targetY = point.originalY + limitedMovement.dy;
+                } else {
+                    // Gradually return points to their original position
+                    point.targetX = point.originalX;
+                    point.targetY = point.originalY;
+                }
+            });
+        });
+
+        // Optional: Reset points when the mouse leaves the SVG
+        container.addEventListener('mouseleave', () => {
+            points.forEach((point) => {
+                point.targetX = point.originalX;
+                point.targetY = point.originalY;
+            });
+        });
+
+        // Optional: Handle window resize to recenter the grid
+        window.addEventListener('resize', () => {
+            const newWidth = window.innerWidth;
+            const newGridWidth = (cols - 1) * spacingX + spacingX / 2;
+            const newOffsetX = (newWidth - newGridWidth) / 2;
+
+            points.forEach((point, index) => {
+                const row = Math.floor(index / cols);
+                const col = index % cols;
+                const rowOffset = (row % 2 === 0) ? 0 : spacingX / 2;
+                point.originalX = col * spacingX + rowOffset + newOffsetX + randomNoise();
+                point.originalY = Math.floor(index / cols) * spacingY + bufferSize + randomNoise(); // Reapply buffer
+                point.targetX = point.originalX;
+                point.targetY = point.originalY;
+            });
+        });
+    </script>
 </body>
 </html>
