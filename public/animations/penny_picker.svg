@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none">
+  <style>
+    .dot {
+      fill: transparent;
+      transition: fill 0.2s ease; /* Instant toggle effect */
+    }
+
+    .line {
+      stroke: white;
+      stroke-width: 1;
+      opacity: 0; /* Start hidden */
+      transition: opacity 1s ease; /* Smooth fading */
+    }
+  </style>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="rgb(25, 25, 25)" />
+
+  <!-- Dots arranged in a circular grid filling the 200x100 viewport -->
+  <circle class="dot" cx="100" cy="10" r="3" />
+  <circle class="dot" cx="140" cy="25" r="3" />
+  <circle class="dot" cx="180" cy="50" r="3" />
+  <circle class="dot" cx="140" cy="75" r="3" />
+  <circle class="dot" cx="100" cy="90" r="3" />
+  <circle class="dot" cx="60" cy="75" r="3" />
+  <circle class="dot" cx="20" cy="50" r="3" />
+  <circle class="dot" cx="60" cy="25" r="3" />
+  <circle class="dot" cx="120" cy="35" r="3" />
+  <circle class="dot" cx="80" cy="35" r="3" />
+  <circle class="dot" cx="120" cy="65" r="3" />
+  <circle class="dot" cx="80" cy="65" r="3" />
+
+  <!-- Line to draw connections -->
+  <path class="line" d="M 0 0" />
+
+  <script type="application/ecmascript">
+    <![CDATA[
+      (function () {
+        const svgDoc = document.currentScript.ownerDocument;
+        const dots = svgDoc.querySelectorAll('.dot');
+        const line = svgDoc.querySelector('.line');
+        const allDots = Array.from(dots);
+
+        let toggling = true; // Controls whether the toggling logic is active
+
+        // Function to randomly toggle a dot's color with a 4% chance
+        function toggleDot(dot) {
+          if (toggling) {
+            const randomChance = Math.random();
+            if (randomChance < 0.04) { // 4% chance
+              dot.style.fill = dot.style.fill === 'white' ? 'transparent' : 'white';
+            }
+            setTimeout(() => toggleDot(dot), 30); // Recursively call every 200ms
+          }
+        }
+
+        // Initialize dots with random states
+        dots.forEach(dot => {
+          dot.style.fill = Math.random() > 0.9 ? 'white' : 'transparent';
+          toggleDot(dot);
+        });
+
+        // Function to draw lines connecting white dots
+        function drawLines(whiteDots) {
+          let pathData = '';
+
+          // Connect each white dot to all other white dots
+          whiteDots.forEach((dot, i) => {
+            const cx = dot.getAttribute('cx');
+            const cy = dot.getAttribute('cy');
+
+            for (let j = i + 1; j < whiteDots.length; j++) {
+              const targetCx = whiteDots[j].getAttribute('cx');
+              const targetCy = whiteDots[j].getAttribute('cy');
+              pathData += `M ${cx} ${cy} L ${targetCx} ${targetCy} `;
+            }
+          });
+
+          line.setAttribute('d', pathData); // Set path data
+          line.style.opacity = 1; // Make the lines visible
+        }
+
+        // Function to reset dots and lines
+        function resetDotsAndLines() {
+          allDots.forEach(dot => dot.style.fill = 'transparent');
+          line.style.opacity = 0; // Fade the lines
+        }
+
+        // Main logic: Check for 6 or more white dots
+        setInterval(() => {
+          if (!toggling) return;
+
+          const whiteDots = allDots.filter(dot => dot.style.fill === 'white');
+
+          if (whiteDots.length >= 6) {
+            toggling = false; // Stop toggling while lines are being drawn
+            drawLines(whiteDots); // Draw lines connecting the dots
+            setTimeout(() => {
+              resetDotsAndLines(); // Fade out dots and lines
+              toggling = true; // Restart toggling after fading
+              allDots.forEach(dot => toggleDot(dot)); // Resume toggling
+            }, 400); // Reset after 1 second
+          }
+        }, 30); // Check every 200ms
+      })();
+    ]]>
+  </script>
+</svg>
