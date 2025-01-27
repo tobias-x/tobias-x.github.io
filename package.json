@@ -4,23 +4,22 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "next build", // Generates the static site using output: 'export'
     "start": "next start",
     "lint": "next lint",
-    "export": "next build && npx next export",
-    "deploy": "npm run export && gh-pages -d out"
+    "deploy": "npm run build && gh-pages -d out" // Builds and deploys to GitHub Pages
   },
   "dependencies": {
     "autoprefixer": "^10.4.20",
     "framer-motion": "^12.0.5",
     "mathjs": "^14.1.0",
-    "next": "15.1.6",
+    "next": "13.4.19", // Replace with your Next.js version
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scroll-parallax": "^3.4.5"
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0",
+    "gh-pages": "^6.3.0", // For deploying to GitHub Pages
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17"
   }
