@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none">
+  <style>
+    .background {
+      fill: rgb(25, 25, 25);
+    }
+    .line {
+      fill: none;
+      stroke: white;
+      stroke-width: 0.5;
+      stroke-linejoin: round;
+    }
+    .second-line {
+      fill: none;
+      stroke: lightblue;
+      stroke-width: 0.5;
+      stroke-linejoin: round;
+    }
+  </style>
+
+  <!-- Background -->
+  <rect class="background" width="100%" height="100%" />
+
+  <!-- Paths for the time series -->
+  <path class="line" d="" />
+  <path class="second-line" d="" />
+
+  <script type="application/ecmascript">
+    <![CDATA[
+      (function () {
+        const svgDoc = document.currentScript.ownerDocument;
+        const path1 = svgDoc.querySelector('.line');
+        const path2 = svgDoc.querySelector('.second-line');
+
+        // Time series data and parameters
+        const height = 100;
+        const width = 200;
+        const stepSize = 1; // Step size for drawing points
+        const maxDataPoints = width / stepSize; // Total points visible on screen
+        const lagSteps = 10; // Fixed lag for the second path
+        const timeSeriesData = []; // Stores y-values for the first path
+        const secondPathData = []; // Stores y-values for the second path
+        const randomSteps = new Array(1000).fill(0).map(() => (Math.random() * 2 - 1) * 6); // Pre-generated noise
+        let randomStepIndex = 0;
+
+        // Generate random data for the first path
+        function generateRandomData() {
+          if (timeSeriesData.length === 0) {
+            timeSeriesData.push(50); // Start at the vertical midpoint (y=50)
+            secondPathData.push(50); // Initialize the second path with the same value
+          }
+
+          const lastValue = timeSeriesData[timeSeriesData.length - 1];
+          const randomStep = randomSteps[randomStepIndex % randomSteps.length];
+          randomStepIndex++;
+
+          // Calculate next value with bias toward midpoint (y=50)
+          let nextValue = lastValue + randomStep;
+          const biasFactor = 0.02; // Strength of the bias
+          nextValue += (50 - nextValue) * biasFactor; // Pull toward midpoint
+
+          // Enforce boundary limits
+          const maxValue = height; // Top boundary (y=100)
+          const minValue = 0; // Bottom boundary (y=0)
+          if (nextValue > maxValue) nextValue = maxValue;
+          if (nextValue < minValue) nextValue = minValue;
+
+          // Add next value to the series
+          timeSeriesData.push(nextValue);
+
+          // Remove excess points from the first path
+          if (timeSeriesData.length > maxDataPoints) {
+            timeSeriesData.shift();
+          }
+        }
+
+        // Generate data for the second path
+        function generateSecondPath() {
+          if (timeSeriesData.length >= lagSteps) {
+            const laggedValue = timeSeriesData[timeSeriesData.length - lagSteps]; // Get lagged value
+            const noise = randomSteps[randomStepIndex % randomSteps.length] * 0.5; // Add small noise
+            randomStepIndex++;
+
+            // Calculate the new value with noise
+            let newValue = laggedValue + noise;
+
+            // Enforce boundary limits
+            const maxValue = height;
+            const minValue = 0;
+            if (newValue > maxValue) newValue = maxValue;
+            if (newValue < minValue) newValue = minValue;
+
+            secondPathData.push(newValue);
+          }
+
+          // Ensure second path matches the length of the first path
+          while (secondPathData.length < timeSeriesData.length) {
+            secondPathData.push(50); // Fill missing points with the midpoint
+          }
+
+          // Remove excess points from the second path
+          if (secondPathData.length > maxDataPoints) {
+            secondPathData.shift();
+          }
+        }
+
+        // Generate the SVG path from time series data
+        function generatePath(data) {
+          const points = data.map(
+            (value, index) => `${index * stepSize},${value}`
+          );
+          return `M ${points.join(' L ')}`;
+        }
+
+        // Update the paths
+        function updatePaths() {
+          generateRandomData(); // Update the main time series
+          generateSecondPath(); // Update the lagged second path
+
+          // Update the SVG paths
+          const newPath1 = generatePath(timeSeriesData);
+          const newPath2 = generatePath(secondPathData);
+
+          path1.setAttribute('d', newPath1);
+          path2.setAttribute('d', newPath2);
+        }
+
+        // Animation loop
+        function renderLoop() {
+          updatePaths();
+          setTimeout(renderLoop, 20); // Slower updates (50ms per frame)
+        }
+
+        // Start the animation loop
+        renderLoop();
+      })();
+    ]]>
+  </script>
+</svg>
