@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production';
 const nextConfig = {
-    output: 'export', // Enables static export
-  };
-  
-  export default nextConfig;
-  
+  reactStrictMode: true,
+  images: {
+    unoptimized: true, // Disable default image optimization
+  },
+  assetPrefix: isProd ? '' : '',
+  basePath: isProd ? '' : '',
+  output: 'export'
+};
+
+export default nextConfig;
