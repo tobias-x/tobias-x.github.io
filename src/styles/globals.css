@@ -10,13 +10,6 @@ body {
   width: 100%;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  background-color:  #000;
-}
-
 h1, h2, h3 {
   font-family: 'Roboto', sans-serif;
 }
@@ -24,4 +17,9 @@ h1, h2, h3 {
 canvas {
   background-color: #000; /* Dark background for the time series */
   border-radius: 0px;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color:  #000;
 }

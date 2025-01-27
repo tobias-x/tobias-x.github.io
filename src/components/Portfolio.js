@@ -1,8 +1,9 @@
 import React from 'react';
+import { Github } from "lucide-react";
 
-function Portfolio({ title, items, description }) {
+function Portfolio({ title, id, items, description }) {
     return (
-        <div className="bg-black text-white py-0">
+        <div id={id} className="bg-black text-white py-0">
             <h2 className="text-2xl font-bold text-center mb-6">{title}</h2>
             <p className="text-center text-white mb-6">{description}</p> {/* Display the portfolio description */}
 
@@ -13,29 +14,27 @@ function Portfolio({ title, items, description }) {
                         key={index}
                         className="p-4 bg-[rgb(25,25,25)] rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
                     >
-                        <div className="flex items-center justify-between bg-[rgb(25,25,25)] p-2 rounded">
-                            <h3 className="text-xl font-semibold bg-[rgb(25,25,25)] rounded">
-                                {item.name}
+                        <div className="flex items-center justify-between p-2 rounded">
+                            {/* Flex container for name and GitHub logo */}
+                            <div className="flex items-center space-x-2">
+                                <h3 className="text-xl font-semibold">{item.name}</h3>
                                 {item.github_link && (
                                     <a
                                         href={`https://${item.github_link}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="ml-2 bg-[rgb(25,25,25)] p-1 rounded"
+                                        className="text-white hover:text-gray-300 transition-colors"
+                                        aria-label="GitHub Link"
                                     >
-                                        <img
-                                            src="/github_logo.svg"
-                                            alt="GitHub"
-                                            className="w-5 h-5 inline bg-transparent"
-                                        />
+                                        <Github size={20} />
                                     </a>
                                 )}
-                            </h3>
+                            </div>
                         </div>
                         {/* Render SVG Animation */}
 
                         {item.animation && (
-                            <div className="bg-[rgb(25,25,25)] p-2 rounded">
+                            <div className="p-2 rounded">
                                 <object
                                     data={item.animation}
                                     type="image/svg+xml"
@@ -44,7 +43,7 @@ function Portfolio({ title, items, description }) {
                                 />
                             </div>
                         )}
-                        <p className="text-gray-400 mt-2 bg-[rgb(25,25,25)] p-2 rounded">
+                        <p className="text-gray-400 mt-2 p-2 rounded">
                             {item.description}
                         </p>
                     </div>
@@ -102,6 +101,7 @@ export function SoftwarePortfolio() {
     return (
         <Portfolio
             title="Software"
+            id="software"
             items={softwareProjects}
             description="Most of the software I make is related to trading, because that's what I do for a job. But there's some other stuff as well."
         />
@@ -112,6 +112,7 @@ export function ArtworkPortfolio() {
     return (
         <Portfolio
             title="Artwork"
+            id="artwork"
             items={artworkPieces}
             description="A collection of some artwork I've made."
         />
