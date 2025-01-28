@@ -88,7 +88,7 @@ nav {
 }
 
 /* Logo Rotation for Small Screens */
-@media (max-width: 450px) {
+@media (max-width: 420px) {
   .logo-text {
     transform: rotate(90deg) translateX(8px) translateY(-8px); /* Rotate the text 90 degrees */
     transform-origin: 10px 10px; /* Pivot at the center of height and width */
