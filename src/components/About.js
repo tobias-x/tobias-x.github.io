@@ -52,7 +52,7 @@ const About = () => {
   }, [asciiArt, duration]);
 
   return (
-    <section id="about" className="h-[95vh] py-2 bg-black text-white flex items-center">
+    <section id="about" className="h-[95vh] py-2 text-white flex items-center">
       <div className="container mx-auto">
         <pre
           className="mx-auto text-center text-xs whitespace-pre-wrap"

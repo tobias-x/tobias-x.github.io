@@ -1,8 +1,9 @@
-/* ./styles/globals.css */
+/* Tailwind Base Setup */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* General Styles */
 body {
   font-family: 'Helvetica', sans-serif;
   margin: 0;
@@ -10,8 +11,10 @@ body {
   width: 100%;
 }
 
-h1, h2, h3 {
-  font-family: 'Roboto', sans-serif;
+h1, h2, h3, p, span {
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box; /* Ensure padding doesn't affect width calculations */
 }
 
 canvas {
@@ -21,5 +24,82 @@ canvas {
 
 html {
   scroll-behavior: smooth;
-  background-color:  #000;
+  background-color: #000;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit; /* Apply consistent box-sizing */
+}
+
+/* Navbar Styles */
+nav {
+  height: 64px; /* Fixed height */
+  display: flex;
+  align-items: center; /* Vertically align items */
+  background-color: black;
+  position: relative;
+  width: 100%;
+}
+
+/* Navbar Container */
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px; /* Horizontal padding for the container */
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Left Section: Logo */
+.logo-text {
+  white-space: nowrap; /* Prevent wrapping */
+  display: inline-block; /* Allow for proper rotation */
+  flex-shrink: 1; /* Shrink when necessary */
+  overflow: visible; /* Allow overflow */
+  transition: transform; /* Smooth transition */
+}
+
+/* Right Section: Navigation Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px; /* Maintain 16px spacing between links */
+  position: absolute;
+  right: 16px; /* Align to the right-hand side */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%);
+}
+
+/* Style for individual links */
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: gray;
+}
+
+/* Logo Rotation for Small Screens */
+@media (max-width: 450px) {
+  .logo-text {
+    transform: rotate(90deg) translateX(8px) translateY(-8px); /* Rotate the text 90 degrees */
+    transform-origin: 10px 10px; /* Pivot at the center of height and width */
+    position: absolute; /* Allow absolute positioning */
+    left: 16px; /* Keep aligned with the left padding */
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: visible; /* Allow vertical overflow */
+  }
+
+  .nav-links {
+    justify-content: flex-end; /* Keep links aligned to the right */
+    right: 16px; /* Maintain 16px from the right edge */
+  }
 }

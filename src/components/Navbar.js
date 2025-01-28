@@ -1,45 +1,45 @@
 import { Instagram, Linkedin } from "lucide-react"; // Install lucide-react or use another icon library
 
 export default function Navbar() {
-    return (
-        <nav className="bg-black py-4 w-full">
-            <div className="flex items-center justify-between px-4">
-                {/* Left-aligned logo */}
-                <a href="#" className="text-white font-semibold text-xl">
-                    . / tobias_franks
-                </a>
+  return (
+    <nav className="bg-black py-4 w-full">
+      <div className="nav-container">
+        {/* Left Section: ./tobias_franks */}
+        <a
+          href="#"
+          className="text-white font-semibold text-xl logo-text"
+        >
+          . / tobias_franks
+        </a>
 
-                {/* Right-aligned links */}
-                <div className="flex items-center space-x-6">
-                    {/* Navigation Links */}
-                    <a href="#software" className="text-white hover:text-gray-300">
-                        Software
-                    </a>
-                    <a href="#artwork" className="text-white hover:text-gray-300">
-                        Artwork
-                    </a>
-
-                    {/* Social Media Links */}
-                    <a
-                        href="https://www.instagram.com/tobias.xlyt"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white hover:text-gray-300"
-                        aria-label="Instagram"
-                    >
-                        <Instagram size={20} />
-                    </a>
-                    <a
-                        href="https://www.linkedin.com/in/tobiasfranks"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white hover:text-gray-300 mr-4"
-                        aria-label="LinkedIn"
-                    >
-                        <Linkedin size={20} />
-                    </a>
-                </div>
-            </div>
-        </nav>
-    );
+        {/* Right Section: Navigation Links */}
+        <div className="nav-links">
+          <a href="#software" className="hover:text-gray-300">
+            Software
+          </a>
+          <a href="#artwork" className="hover:text-gray-300">
+            Artwork
+          </a>
+          <a
+            href="https://www.instagram.com/tobias.xlyt"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            className="hover:text-gray-300"
+          >
+            <Instagram size={20} />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/tobiasfranks"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="hover:text-gray-300"
+          >
+            <Linkedin size={20} />
+          </a>
+        </div>
+      </div>
+    </nav>
+  );
 }
