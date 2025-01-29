@@ -40,7 +40,7 @@ function TimeSeries() {
 
       // Calculate the next value in the walk with some bias toward zero
       let nextValue = lastValue + randomStep;
-      const biasFactor = 0.03;
+      const biasFactor = 0.01;
       nextValue += (0 - nextValue) * biasFactor;
 
       // Enforce boundary limits to keep the data within the visible area
@@ -69,21 +69,30 @@ function TimeSeries() {
     const drawTimeSeries = () => {
       // Clear only the part of the canvas where the time series is drawn
       ctx.clearRect(0, 0, width, height);
-
-      // Set line style
-      ctx.lineJoin = 'round';  // Smooth transitions between lines
+    
+      // Draw zero-line (horizontal line at y=0)
       ctx.beginPath();
-
+      ctx.moveTo(0, height / 2);
+      ctx.lineTo(width, height / 2);
+      ctx.strokeStyle = 'gray';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    
+      // Set line style for the time series
+      ctx.beginPath();
+      ctx.lineJoin = 'round';  // Smooth transitions between lines
+    
       // Draw fewer lines by increasing the horizontal step size
       for (let i = 0; i < timeSeriesData.length; i += stepSize) {
         const dataPoint = timeSeriesData[i];
         ctx.lineTo(i, height / 2 - dataPoint);  // Offset by dataPoint to simulate the "walk"
       }
-
+    
       ctx.strokeStyle = 'white';
       ctx.lineWidth = 1;  // Default line thickness
       ctx.stroke();
     };
+    
 
     const update = () => {
       generateRandomData();  // Generate new data
