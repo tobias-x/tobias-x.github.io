@@ -41,7 +41,7 @@ function TimeSeries() {
       // Calculate the next value in the walk with some bias toward zero
       let nextValue = lastValue + randomStep;
       const biasFactor = 0.03;
-      nextValue += (0 - nextValue) / (height / 2) * biasFactor;
+      nextValue += (0 - nextValue) * biasFactor;
 
       // Enforce boundary limits to keep the data within the visible area
       const maxValue = height / 2;  // Maximum boundary value (half the canvas height)
