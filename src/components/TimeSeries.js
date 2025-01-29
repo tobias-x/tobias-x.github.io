@@ -71,12 +71,12 @@ function TimeSeries() {
       ctx.clearRect(0, 0, width, height);
     
       // Draw zero-line (horizontal line at y=0)
-      ctx.beginPath();
-      ctx.moveTo(0, height / 2);
-      ctx.lineTo(width, height / 2);
-      ctx.strokeStyle = 'gray';
-      ctx.lineWidth = 1;
-      ctx.stroke();
+      // ctx.beginPath();
+      // ctx.moveTo(0, height / 2);
+      // ctx.lineTo(width, height / 2);
+      // ctx.strokeStyle = 'gray';
+      // ctx.lineWidth = 1;
+      // ctx.stroke();
     
       // Set line style for the time series
       ctx.beginPath();
