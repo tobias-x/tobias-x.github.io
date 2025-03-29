@@ -62,7 +62,7 @@ const softwareProjects = [
         name: 'Astrodynamics Simulator', 
         github_link: "github.com/tobias-x/astrodynamics_sim", 
         animation: '/animations/astrodynamics.svg', 
-        description: "Built an Astrodynamics Simulator using C++/CUDA kernels. Integrated it with some OpenGL graphics so that it can simulate and visualise multi-body problems in realtime. Super speedy." 
+        description: "Built an Astrodynamics Simulator using C++/CUDA kernels. Visualised it using plotly in a Jupyter Notebook but eventually planning to migrate to VTK. Super speedy." 
     },
     { 
         name: 'Polymarket Penny-Picker', 
@@ -72,10 +72,11 @@ const softwareProjects = [
     { 
         name: 'Arb-free Vol Spline Fitter', 
         animation: '/animations/vol_spline.svg',
-        description: "Built an arb-free spline fitter in Python, manually fitting a B-spline with Cox-de-Boor and smoothing it with __. Eventually migrated it to C++." 
+        description: "Built an arb-free spline fitter in Python, manually fitting a B-spline with Cox-de-Boor and smoothing it with an adaptation of Fengler's method. Eventually migrated it to C++." 
     },
     { 
         name: 'Killer Sudoku iOS app', 
+        github_link: 'https://github.com/tobias-x/killer-sudoku/tree/main',
         animation: '/animations/sudoku.svg', // Corrected to point to penny_picker.svg
         description: "Tried to download a Killer Sudoku app and they were all $10. Built one myself using Swift instead. Worst experience of my life." 
     },
@@ -86,6 +87,7 @@ const softwareProjects = [
     },
     { 
         name: 'KD-Tree Business Finder', 
+        github_link: "github.com/tobias-x/KD-Tree-Business-Finder",
         animation: '/animations/kdt.svg',
         description: "Built a 'Business Directory' tool using KD-Trees implemented in C. Beautiful." 
     },
