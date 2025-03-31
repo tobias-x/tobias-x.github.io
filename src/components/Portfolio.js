@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Github } from "lucide-react";
 
+// Generic Portfolio renderer
 function Portfolio({ title, id, items, description }) {
     return (
         <div id={id} className="bg-black text-white py-0">
             <h2 className="text-2xl font-bold text-center mb-6">{title}</h2>
-            <p className="text-center text-white mb-6">{description}</p> {/* Display the portfolio description */}
+            <p className="text-center text-white mb-6">{description}</p>
 
-            {/* Container for grid items */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
                 {items.map((item, index) => (
                     <div
@@ -15,34 +15,58 @@ function Portfolio({ title, id, items, description }) {
                         className="p-4 bg-[rgb(25,25,25)] rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
                     >
                         <div className="flex items-center justify-between p-2 rounded">
-                            {/* Flex container for name and GitHub logo */}
-                            <div className="flex items-center space-x-2">
-                                <h3 className="text-xl font-semibold">{item.name}</h3>
+                            <div className="flex items-center space-x-2 w-full overflow-hidden">
+                                {item.link ? (
+                                    <a
+                                    href={item.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-xl font-semibold text-white hover:text-gray-300 truncate whitespace-nowrap overflow-hidden"
+                                    >
+                                    {item.name}
+                                    </a>
+                                ) : (
+                                    <h3 className="text-xl font-semibold truncate whitespace-nowrap overflow-hidden">
+                                    {item.name}
+                                    </h3>
+                                )}
+
                                 {item.github_link && (
                                     <a
-                                        href={`https://${item.github_link}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-white hover:text-gray-300 transition-colors"
-                                        aria-label="GitHub Link"
+                                    href={`https://${item.github_link}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-white hover:text-gray-300 transition-colors shrink-0"
+                                    aria-label="GitHub Link"
                                     >
-                                        <Github size={20} />
+                                    <Github size={20} />
                                     </a>
                                 )}
-                            </div>
+                                </div>
+
                         </div>
-                        {/* Render SVG Animation */}
 
                         {item.animation && (
-                            <div className="p-2 rounded">
+                            <div className="p-2 rounded overflow-hidden">
+                                <div className="relative w-full" style={{ paddingTop: '50%' }}>
+                                {item.animation?.toLowerCase().endsWith('.svg') ? (
                                 <object
                                     data={item.animation}
                                     type="image/svg+xml"
-                                    className="w-full h-auto"
-                                    aria-label="Animated SVG"
+                                    className="absolute top-0 left-0 w-full h-full object-contain"
+                                    aria-label="SVG Thumbnail"
                                 />
+                                ) : (
+                                <img
+                                    src={item.animation}
+                                    alt={`${item.name} thumbnail`}
+                                    className="absolute top-0 left-0 w-full h-full object-contain"
+                                />
+                                )}
+                                </div>
                             </div>
                         )}
+
                         <p className="text-gray-400 mt-2 p-2 rounded">
                             {item.description}
                         </p>
@@ -50,55 +74,55 @@ function Portfolio({ title, id, items, description }) {
                 ))}
             </div>
 
-            {/* Adding space between grid items */}
-            <div className="mt-8 bg-black"></div> {/* Ensure the background of the break is black */}
+            <div className="mt-8 bg-black"></div>
         </div>
     );
 }
 
-// Portfolio Data
+// Software projects
 const softwareProjects = [
-    { 
-        name: 'Astrodynamics Simulator', 
-        github_link: "github.com/tobias-x/astrodynamics_sim", 
-        animation: '/animations/astrodynamics.svg', 
-        description: "Built an Astrodynamics Simulator using C++/CUDA kernels. Visualised it using plotly in a Jupyter Notebook but eventually planning to migrate to VTK. Super speedy." 
+    {
+        name: 'Astrodynamics Simulator',
+        github_link: "github.com/tobias-x/astrodynamics_sim",
+        animation: '/animations/astrodynamics.svg',
+        description: "Built an Astrodynamics Simulator using C++/CUDA kernels. Visualised it using plotly in a Jupyter Notebook but eventually planning to migrate to VTK. Super speedy."
     },
-    { 
-        name: 'Polymarket Penny-Picker', 
-        animation: '/animations/penny_picker.svg', // Corrected to point to penny_picker.svg
-        description: "Built a Polymarket token arbitrage engine using an event-driven framework in Python. Ran it out an AWS region in Canada and added some special sauce to make it the fastest arb bot in the market." 
+    {
+        name: 'Polymarket Penny-Picker',
+        animation: '/animations/penny_picker.svg',
+        description: "Built a Polymarket token arbitrage engine using an event-driven framework in Python. Ran it out an AWS region in Canada and added some special sauce to make it the fastest arb bot in the market."
     },
-    { 
-        name: 'Arb-free Vol Spline Fitter', 
+    {
+        name: 'Arb-free Vol Spline Fitter',
         animation: '/animations/vol_spline.svg',
-        description: "Built an arb-free spline fitter in Python, manually fitting a B-spline with Cox-de-Boor and smoothing it with an adaptation of Fengler's method. Eventually migrated it to C++." 
+        description: "Built an arb-free spline fitter in Python, manually fitting a B-spline with Cox-de-Boor and smoothing it with an adaptation of Fengler's method. Eventually migrated it to C++."
     },
-    { 
-        name: 'Killer Sudoku iOS app', 
+    {
+        name: 'Killer Sudoku iOS app',
         github_link: 'https://github.com/tobias-x/killer-sudoku/tree/main',
-        animation: '/animations/sudoku.svg', // Corrected to point to penny_picker.svg
-        description: "Tried to download a Killer Sudoku app and they were all $10. Built one myself using Swift instead. Worst experience of my life." 
+        animation: '/animations/sudoku.svg',
+        description: "Tried to download a Killer Sudoku app and they were all $10. Built one myself using Swift instead. Worst experience of my life."
     },
-    { 
-        name: 'XGBoost Val Model', 
+    {
+        name: 'XGBoost Val Model',
         animation: '/animations/xgb.svg',
-        description: "First exposure to trading during Uni, trying to predict whether a stock will go up or down based on some features and using XGBoost/LightGBM." 
+        description: "First exposure to trading during Uni, trying to predict whether a stock will go up or down based on some features and using XGBoost/LightGBM."
     },
-    { 
-        name: 'KD-Tree Business Finder', 
+    {
+        name: 'KD-Tree Business Finder',
         github_link: "github.com/tobias-x/KD-Tree-Business-Finder",
         animation: '/animations/kdt.svg',
-        description: "Built a 'Business Directory' tool using KD-Trees implemented in C. Beautiful." 
+        description: "Built a 'Business Directory' tool using KD-Trees implemented in C. Beautiful."
     },
 ];
 
+// Art
 const artworkPieces = [
     { name: 'Artwork A', description: 'Description of Artwork A' },
     { name: 'Artwork B', description: 'Description of Artwork B' },
 ];
 
-// Specific Portfolio Wrappers
+// Portfolio sections
 export function SoftwarePortfolio() {
     return (
         <Portfolio
@@ -117,6 +141,43 @@ export function ArtworkPortfolio() {
             id="artwork"
             items={artworkPieces}
             description="A collection of some artwork I've made."
+        />
+    );
+}
+
+export function SubstackPortfolio() {
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        const fetchRSS = async () => {
+            try {
+                const res = await fetch(
+                    'https://api.rss2json.com/v1/api.json?rss_url=https://tobiasx.substack.com/feed'
+                );
+                const data = await res.json();
+
+                const formatted = data.items.slice(0, 6).map(item => ({
+                    name: item.title,
+                    description: item.description.replace(/<[^>]+>/g, '').slice(0, 200) + '...',
+                    link: item.link,
+                    animation: item.enclosure.link || null,
+                }));
+
+                setPosts(formatted);
+            } catch (err) {
+                console.error('Failed to fetch Substack posts:', err);
+            }
+        };
+
+        fetchRSS();
+    }, []);
+
+    return (
+        <Portfolio
+            title="Substack Posts"
+            id="substack"
+            items={posts}
+            description="Some things I've written recently."
         />
     );
 }

@@ -1,5 +1,5 @@
 import About from '../components/About';
-import { SoftwarePortfolio, ArtworkPortfolio } from '../components/Portfolio';
+import { SoftwarePortfolio, ArtworkPortfolio, SubstackPortfolio } from '../components/Portfolio';
 import TimeSeries from '../components/TimeSeries';
 import Layout from '../components/Layout';
 import ArtworkVisual from '../components/ArtworkVisual';
@@ -13,7 +13,7 @@ export default function Home() {
       <TimeSeries />
       <SoftwarePortfolio />
       <ArtworkVisual />
-      <ArtworkPortfolio />
+      <SubstackPortfolio />
     </Layout>
   );
 }

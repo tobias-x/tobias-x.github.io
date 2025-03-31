@@ -17,8 +17,8 @@ export default function Navbar() {
           <a href="#software" className="hover:text-gray-300">
             Software
           </a>
-          <a href="#artwork" className="hover:text-gray-300">
-            Artwork
+          <a href="#substack" className="hover:text-gray-300">
+            Substack
           </a>
           <a
             href="https://www.instagram.com/tobias.xlyt"
