@@ -158,7 +158,7 @@ export function SubstackPortfolio() {
 
                 const formatted = data.items.slice(0, 6).map(item => ({
                     name: item.title,
-                    description: item.description.replace(/<[^>]+>/g, '').slice(0, 200) + '...',
+                    description: item.description.replace(/<[^>]+>/g, ''),
                     link: item.link,
                     animation: item.enclosure.link || null,
                 }));
