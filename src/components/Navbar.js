@@ -1,43 +1,59 @@
-import { Instagram, Linkedin } from "lucide-react"; // Install lucide-react or use another icon library
+import { useRouter } from "next/router";
+import { Instagram, Linkedin } from "lucide-react";
+
+function SmartLink({ href, children, className, ...props }) {
+  const router = useRouter();
+  const currentPath = router.pathname;
+
+  const isSamePageAnchor = href.startsWith("#");
+  const isSamePageHash = href.startsWith("/") && currentPath === "/" && href.includes("#");
+  const openInSameTab = isSamePageAnchor || isSamePageHash;
+
+  const target = openInSameTab ? "_self" : "_blank";
+  const rel = openInSameTab ? undefined : "noopener noreferrer";
+
+  return (
+    <a
+      href={href}
+      target={target}
+      rel={rel}
+      className={className}
+      {...props}
+    >
+      {children}
+    </a>
+  );
+}
 
 export default function Navbar() {
   return (
     <nav className="bg-black py-4 w-full">
-      <div className="nav-container">
-        {/* Left Section: ./tobias_franks */}
-        <a
-          href="#"
-          className="text-white font-semibold text-xl logo-text"
-        >
+      <div className="nav-container flex justify-between items-center px-4">
+        <a href="/" className="text-white font-semibold text-xl logo-text">
           . / tobias_franks
         </a>
 
-        {/* Right Section: Navigation Links */}
-        <div className="nav-links">
-          <a href="#software" className="hover:text-gray-300">
+        <div className="nav-links flex items-center space-x-2">
+          <SmartLink href="/#software" className="hover:text-gray-300">
             Software
-          </a>
-          <a href="#substack" className="hover:text-gray-300">
-            Substack
-          </a>
-          <a
+          </SmartLink>
+          <SmartLink href="/#notes" className="hover:text-gray-300">
+            Notes
+          </SmartLink>
+          <SmartLink
             href="https://www.instagram.com/tobias.xlyt"
-            target="_blank"
-            rel="noopener noreferrer"
             aria-label="Instagram"
             className="hover:text-gray-300"
           >
             <Instagram size={20} />
-          </a>
-          <a
+          </SmartLink>
+          <SmartLink
             href="https://www.linkedin.com/in/tobiasfranks"
-            target="_blank"
-            rel="noopener noreferrer"
             aria-label="LinkedIn"
             className="hover:text-gray-300"
           >
             <Linkedin size={20} />
-          </a>
+          </SmartLink>
         </div>
       </div>
     </nav>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Github } from "lucide-react";
 
 // Generic Portfolio renderer
@@ -18,51 +18,50 @@ function Portfolio({ title, id, items, description }) {
                             <div className="flex items-center space-x-2 w-full overflow-hidden">
                                 {item.link ? (
                                     <a
-                                    href={item.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-xl font-semibold text-white hover:text-gray-300 truncate whitespace-nowrap overflow-hidden"
+                                        href={item.link}
+                                        target={item.link.startsWith('/') ? "_self" : "_blank"}
+                                        rel={item.link.startsWith('/') ? undefined : "noopener noreferrer"}
+                                        className="text-xl font-semibold text-white hover:text-gray-300 truncate whitespace-nowrap overflow-hidden"
                                     >
-                                    {item.name}
+                                        {item.name}
                                     </a>
                                 ) : (
                                     <h3 className="text-xl font-semibold truncate whitespace-nowrap overflow-hidden">
-                                    {item.name}
+                                        {item.name}
                                     </h3>
                                 )}
 
                                 {item.github_link && (
                                     <a
-                                    href={`https://${item.github_link}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-white hover:text-gray-300 transition-colors shrink-0"
-                                    aria-label="GitHub Link"
+                                        href={`https://${item.github_link}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-white hover:text-gray-300 transition-colors shrink-0"
+                                        aria-label="GitHub Link"
                                     >
-                                    <Github size={20} />
+                                        <Github size={20} />
                                     </a>
                                 )}
-                                </div>
-
+                            </div>
                         </div>
 
                         {item.animation && (
                             <div className="p-2 rounded overflow-hidden">
                                 <div className="relative w-full" style={{ paddingTop: '50%' }}>
-                                {item.animation?.toLowerCase().endsWith('.svg') ? (
-                                <object
-                                    data={item.animation}
-                                    type="image/svg+xml"
-                                    className="absolute top-0 left-0 w-full h-full object-contain"
-                                    aria-label="SVG Thumbnail"
-                                />
-                                ) : (
-                                <img
-                                    src={item.animation}
-                                    alt={`${item.name} thumbnail`}
-                                    className="absolute top-0 left-0 w-full h-full object-contain"
-                                />
-                                )}
+                                    {item.animation?.toLowerCase().endsWith('.svg') ? (
+                                        <object
+                                            data={item.animation}
+                                            type="image/svg+xml"
+                                            className="absolute top-0 left-0 w-full h-full object-contain"
+                                            aria-label="SVG Thumbnail"
+                                        />
+                                    ) : (
+                                        <img
+                                            src={item.animation}
+                                            alt={`${item.name} thumbnail`}
+                                            className="absolute top-0 left-0 w-full h-full object-contain"
+                                        />
+                                    )}
                                 </div>
                             </div>
                         )}
@@ -122,7 +121,16 @@ const artworkPieces = [
     { name: 'Artwork B', description: 'Description of Artwork B' },
 ];
 
-// Portfolio sections
+// Blog posts (self-hosted)
+const blogPosts = [
+    {
+        name: 'The Tokenisation of Sovereignty',
+        description: 'How CBDCs might reshape society',
+        animation: '/animations/token.svg',
+        link: 'posts/first-post',
+    }
+];
+
 export function SoftwarePortfolio() {
     return (
         <Portfolio
@@ -145,38 +153,12 @@ export function ArtworkPortfolio() {
     );
 }
 
-export function SubstackPortfolio() {
-    const [posts, setPosts] = useState([]);
-
-    useEffect(() => {
-        const fetchRSS = async () => {
-            try {
-                const res = await fetch(
-                    'https://api.rss2json.com/v1/api.json?rss_url=https://tobiasx.substack.com/feed'
-                );
-                const data = await res.json();
-
-                const formatted = data.items.slice(0, 6).map(item => ({
-                    name: item.title,
-                    description: item.description.replace(/<[^>]+>/g, ''),
-                    link: item.link,
-                    animation: item.enclosure.link || null,
-                }));
-
-                setPosts(formatted);
-            } catch (err) {
-                console.error('Failed to fetch Substack posts:', err);
-            }
-        };
-
-        fetchRSS();
-    }, []);
-
+export function NotesPortfolio() {
     return (
         <Portfolio
-            title="Substack Posts"
-            id="substack"
-            items={posts}
+            title="Notes"
+            id="notes"
+            items={blogPosts}
             description="Some things I've written recently."
         />
     );
