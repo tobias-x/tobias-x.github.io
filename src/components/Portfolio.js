@@ -111,7 +111,7 @@ const softwareProjects = [
         name: 'KD-Tree Business Finder',
         github_link: "github.com/tobias-x/KD-Tree-Business-Finder",
         animation: '/animations/kdt.svg',
-        description: "Built a 'Business Directory' tool using KD-Trees implemented in C. Beautiful."
+        description: "Built a 'Business Directory' tool using KD-Trees implemented in C."
     },
 ];
 

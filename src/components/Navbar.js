@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { Instagram, Linkedin } from "lucide-react";
+import { Instagram, Linkedin, Github } from "lucide-react";
 
 function SmartLink({ href, children, className, ...props }) {
   const router = useRouter();
@@ -33,12 +33,19 @@ export default function Navbar() {
           . / tobias_franks
         </a>
 
-        <div className="nav-links flex items-center space-x-2">
+        <div className="nav-links flex items-center">
           <SmartLink href="/#software" className="hover:text-gray-300">
             Software
           </SmartLink>
           <SmartLink href="/#notes" className="hover:text-gray-300">
             Notes
+          </SmartLink>
+          <SmartLink
+            href="https://www.github.com/tobias-x"
+            aria-label="Github"
+            className="hover:text-gray-300"
+          >
+            <Github size={20} />
           </SmartLink>
           <SmartLink
             href="https://www.instagram.com/tobias.xlyt"
