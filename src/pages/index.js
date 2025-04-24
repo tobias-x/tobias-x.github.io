@@ -13,7 +13,7 @@ export default function Home() {
       <TimeSeries />
       <SoftwarePortfolio />
       <ArtworkVisual />
-      <NotesPortfolio />
+      {/* <NotesPortfolio /> */}
     </Layout>
   );
 }

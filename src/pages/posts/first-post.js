@@ -23,7 +23,7 @@ export default function TokenisationPost({ markdown }) {
         <br />
         <div className="w-full max-w-[80%] ml-auto text-right px-[10px]">
           <h1 className="text-4xl font-bold mb-4 text-white">The Tokenisation of Sovereignty</h1>
-          <h1 className="text-xl font-bold mb-4 text-white">How CBDCs might reshape society</h1>
+          <h1 className="text-xl font-bold mb-4 text-white">How CBDCs might reshape the economy</h1>
           <p className="text-gray-400 mb-6">April 3, 2025</p>
         </div>
   

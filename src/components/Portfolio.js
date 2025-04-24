@@ -89,12 +89,12 @@ const softwareProjects = [
     {
         name: 'Polymarket Penny-Picker',
         animation: '/animations/penny_picker.svg',
-        description: "Built a Polymarket token arbitrage engine using an event-driven framework in Python. Ran it out an AWS region in Canada and added some special sauce to make it the fastest arb bot in the market."
+        description: "Built a Polymarket token arbitrage engine using an asynchronous, event-driven framework in Python. Ran it out of an AWS region in Canada and added some spice to make it v fast."
     },
     {
         name: 'Arb-free Vol Spline Fitter',
         animation: '/animations/vol_spline.svg',
-        description: "Built an arb-free spline fitter in Python, manually fitting a B-spline with Cox-de-Boor and smoothing it with an adaptation of Fengler's method. Eventually migrated it to C++."
+        description: "Built an arb-free spline fitter in Python, manually fitting a B-spline with Cox-de-Boor and smoothing it with an adaptation of Fengler's method. Eventually migrated it to C++ and used in other projects."
     },
     {
         name: 'Killer Sudoku iOS app',
@@ -124,11 +124,17 @@ const artworkPieces = [
 // Blog posts (self-hosted)
 const blogPosts = [
     {
+        name: 'Ring Buffer Registries...',
+        description: '...and their impact on my emotional state.',
+        animation: '/animations/stream_registry.svg',
+        link: 'posts/second-post',
+    },
+    {
         name: 'The Tokenisation of Sovereignty',
-        description: 'How CBDCs might reshape society',
+        description: 'How CBDCs might reshape the economy',
         animation: '/animations/token.svg',
         link: 'posts/first-post',
-    }
+    },
 ];
 
 export function SoftwarePortfolio() {
