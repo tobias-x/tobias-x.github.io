@@ -94,7 +94,7 @@ const softwareProjects = [
     {
         name: 'Arb-free Vol Spline Fitter',
         animation: '/animations/vol_spline.svg',
-        description: "Built an arb-free spline fitter in Python, manually fitting a B-spline with Cox-de-Boor and smoothing it with an adaptation of Fengler's method. Eventually migrated it to C++ and used in other projects."
+        description: "Built an arb-free spline fitter in Python, manually fitting a B-spline with Cox-de-Boor and smoothing it with an adaptation of Fengler's method. Migrated it to C++ and used in other projects."
     },
     {
         name: 'Killer Sudoku iOS app',
@@ -103,7 +103,7 @@ const softwareProjects = [
         description: "Tried to download a Killer Sudoku app and they were all $10. Built one myself using Swift instead. Worst experience of my life."
     },
     {
-        name: 'XGBoost Val Model',
+        name: 'XGBoost Trading Model',
         animation: '/animations/xgb.svg',
         description: "First exposure to trading during Uni, trying to predict whether a stock will go up or down based on some features and using XGBoost/LightGBM."
     },

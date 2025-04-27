@@ -66,7 +66,7 @@ const About = () => {
         >
           {displayText}
         </pre>
-        <p className="mt-4 text-lg text-center">I'm a ~27yo living in Australia who likes to write software and build systems.</p>
+        <p className="mt-4 text-lg text-center">I'm a ~27yo living in Australia who writes software and builds systems.</p>
       </div>
     </section>
   );
