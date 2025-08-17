@@ -84,12 +84,12 @@ const softwareProjects = [
         name: 'Astrodynamics Simulator',
         github_link: "github.com/tobias-x/astrodynamics_sim",
         animation: '/animations/astrodynamics.svg',
-        description: "Built an Astrodynamics Simulator using C++/CUDA kernels. Visualised it using plotly in a Jupyter Notebook but eventually planning to migrate to VTK. Super speedy."
+        description: "Built an Astrodynamics Simulator using C++/CUDA kernels. Visualised in OpenGL - CUDA version can handle 10k objects at once, with room for optimization."
     },
     {
         name: 'Polymarket Penny-Picker',
         animation: '/animations/penny_picker.svg',
-        description: "Built a Polymarket token arbitrage engine using an asynchronous, event-driven framework in Python. Ran it out of an AWS region in Canada and added some spice to make it v fast."
+        description: "Built a Polymarket token arbitrage engine using an asynchronous, event-driven framework in Python. Ran it out of an AWS region in Canada and added some magic to speed it up."
     },
     {
         name: 'Arb-free Vol Spline Fitter',
@@ -100,7 +100,7 @@ const softwareProjects = [
         name: 'Killer Sudoku iOS app',
         github_link: 'https://github.com/tobias-x/killer-sudoku/tree/main',
         animation: '/animations/sudoku.svg',
-        description: "Tried to download a Killer Sudoku app and they were all $10. Built one myself using Swift instead. Worst experience of my life."
+        description: "Tried to download a Killer Sudoku app and they were all $10. Built one myself using Swift instead. Terrible experience."
     },
     {
         name: 'XGBoost Trading Model',
