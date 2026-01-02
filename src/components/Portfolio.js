@@ -121,22 +121,6 @@ const artworkPieces = [
     { name: 'Artwork B', description: 'Description of Artwork B' },
 ];
 
-// Blog posts (self-hosted)
-const blogPosts = [
-    {
-        name: 'Ring Buffer Registries...',
-        description: '...and their impact on my emotional state.',
-        animation: '/animations/stream_registry.svg',
-        link: 'posts/second-post',
-    },
-    {
-        name: 'The Tokenisation of Sovereignty',
-        description: 'How CBDCs might reshape the economy',
-        animation: '/animations/token.svg',
-        link: 'posts/first-post',
-    },
-];
-
 export function SoftwarePortfolio() {
     return (
         <Portfolio
@@ -155,17 +139,6 @@ export function ArtworkPortfolio() {
             id="artwork"
             items={artworkPieces}
             description="A collection of some artwork I've made."
-        />
-    );
-}
-
-export function NotesPortfolio() {
-    return (
-        <Portfolio
-            title="Notes"
-            id="notes"
-            items={blogPosts}
-            description="Some things I've written recently."
         />
     );
 }
