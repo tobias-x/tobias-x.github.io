@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none">
+  <style>
+    .macro {
+      fill: white;
+      fill-opacity: 0.12;
+      stroke: white;
+      stroke-width: 0.6;
+    }
+    .net {
+      stroke: white;
+      stroke-width: 0.3;
+      opacity: 0.22;
+    }
+  </style>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="rgb(25, 25, 25)" />
+
+  <!-- Nets drawn under the macros so the boxes stay legible -->
+  <g id="nets"></g>
+  <g id="macros"></g>
+
+  <script type="application/ecmascript">
+    <![CDATA[
+      (function () {
+        const svgDoc = document.currentScript.ownerDocument;
+        const SVG_NS = "http://www.w3.org/2000/svg";
+
+        // Die area the macros are legalised into
+        const MIN_X = 3, MIN_Y = 3, MAX_X = 197, MAX_Y = 97;
+
+        // Hard macros: width, height, start position, velocity
+        const macrosGroup = svgDoc.querySelector("#macros");
+        const netsGroup = svgDoc.querySelector("#nets");
+        const specs = [
+          { w: 23.8, h: 14.0, x: 12, y: 10, vx: 8.25, vy: 5.1 },
+          { w: 15.4, h: 18.2, x: 70, y: 55, vx: -6.3, vy: -7.65 },
+          { w: 28.0, h: 9.8, x: 130, y: 20, vx: -9.0, vy: 6.6 },
+          { w: 12.6, h: 12.6, x: 55, y: 12, vx: 9.9, vy: -4.5 },
+          { w: 18.2, h: 15.4, x: 150, y: 62, vx: -5.4, vy: -9.3 },
+          { w: 9.8, h: 21.0, x: 100, y: 30, vx: 7.2, vy: 8.4 },
+          { w: 21.0, h: 8.4, x: 22, y: 72, vx: 7.5, vy: -6.9 },
+          { w: 16.8, h: 11.2, x: 40, y: 40, vx: -7.8, vy: 6.0 },
+          { w: 11.2, h: 16.8, x: 115, y: 62, vx: 9.3, vy: -7.2 },
+          { w: 25.2, h: 8.4, x: 160, y: 12, vx: -6.9, vy: 8.7 },
+          { w: 14.0, h: 14.0, x: 85, y: 78, vx: 8.7, vy: -8.1 },
+          { w: 19.6, h: 12.6, x: 8, y: 45, vx: 6.6, vy: -9.0 },
+          { w: 9.8, h: 18.2, x: 175, y: 35, vx: -9.6, vy: 5.4 },
+          { w: 22.4, h: 10.5, x: 60, y: 25, vx: -7.5, vy: 9.6 },
+        ];
+
+        const macros = specs.map((s) => {
+          const rect = svgDoc.createElementNS(SVG_NS, "rect");
+          rect.setAttribute("class", "macro");
+          rect.setAttribute("width", s.w);
+          rect.setAttribute("height", s.h);
+          macrosGroup.appendChild(rect);
+          return Object.assign({}, s, { el: rect });
+        });
+
+        // Netlist: which macros are wired together
+        const netlist = [
+          [0, 3], [3, 5], [5, 2], [2, 4], [4, 1], [1, 6], [6, 0], [5, 1],
+          [7, 8], [8, 10], [10, 12], [12, 7], [9, 11], [11, 13], [13, 9],
+          [7, 2], [9, 4], [11, 6],
+        ];
+        const nets = netlist.map(() => {
+          const line = svgDoc.createElementNS(SVG_NS, "line");
+          line.setAttribute("class", "net");
+          netsGroup.appendChild(line);
+          return line;
+        });
+
+        let last = null;
+        function step(now) {
+          // Seconds since the previous frame, clamped so a backgrounded tab
+          // doesn't teleport every macro out of the die on resume.
+          const dt = last === null ? 0 : Math.min((now - last) / 1000, 0.05);
+          last = now;
+
+          for (const m of macros) {
+            m.x += m.vx * dt;
+            m.y += m.vy * dt;
+
+            // Reflect off the die boundary
+            if (m.x < MIN_X) { m.x = MIN_X; m.vx = -m.vx; }
+            if (m.x + m.w > MAX_X) { m.x = MAX_X - m.w; m.vx = -m.vx; }
+            if (m.y < MIN_Y) { m.y = MIN_Y; m.vy = -m.vy; }
+            if (m.y + m.h > MAX_Y) { m.y = MAX_Y - m.h; m.vy = -m.vy; }
+
+            m.el.setAttribute("x", m.x);
+            m.el.setAttribute("y", m.y);
+          }
+
+          netlist.forEach((pair, i) => {
+            const a = macros[pair[0]], b = macros[pair[1]];
+            const line = nets[i];
+            line.setAttribute("x1", a.x + a.w / 2);
+            line.setAttribute("y1", a.y + a.h / 2);
+            line.setAttribute("x2", b.x + b.w / 2);
+            line.setAttribute("y2", b.y + b.h / 2);
+          });
+
+          requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+      })();
+    ]]>
+  </script>
+</svg>
