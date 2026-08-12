@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 100" preserveAspectRatio="none">
+  <style>
+    .synapse {
+      fill: none;
+      stroke: white;
+      stroke-width: 0.4;
+      opacity: 0.25;
+    }
+    /* Mutating synapses: connections appear and disappear between generations */
+    .mutating {
+      animation: mutate 9s ease-in-out infinite;
+    }
+    .neuron {
+      fill: rgb(25, 25, 25);
+      stroke: white;
+      stroke-width: 0.7;
+    }
+    .soma {
+      fill: white;
+      opacity: 0;
+      animation: fire 1.5s linear infinite;
+    }
+    .spike {
+      fill: white;
+    }
+
+    /* Neuron body flashes as the wave reaches its layer */
+    @keyframes fire {
+      0%, 10% { opacity: 0; }
+      20% { opacity: 1; }
+      60%, 100% { opacity: 0; }
+    }
+
+    /* Synapse pruned / regrown by the evolutionary step */
+    @keyframes mutate {
+      0%, 40% { opacity: 0.25; stroke-width: 0.4; }
+      50%, 55% { opacity: 0; }
+      70% { opacity: 0.7; stroke-width: 0.8; }
+      100% { opacity: 0.25; stroke-width: 0.4; }
+    }
+  </style>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="rgb(25, 25, 25)" />
+
+  <!-- Synapses (also the motion paths for the spikes) -->
+  <g>
+    <!-- layer 1 -> 2 -->
+    <path id="s1" class="synapse" d="M30,25 L80,20" />
+    <path id="s2" class="synapse mutating" style="animation-delay: 0s;" d="M30,25 L80,50" />
+    <path id="s3" class="synapse" d="M30,50 L80,50" />
+    <path id="s4" class="synapse" d="M30,50 L80,80" />
+    <path id="s5" class="synapse mutating" style="animation-delay: 3s;" d="M30,75 L80,50" />
+    <path id="s6" class="synapse" d="M30,75 L80,80" />
+
+    <!-- layer 2 -> 3 -->
+    <path id="s7" class="synapse" d="M80,20 L130,30" />
+    <path id="s8" class="synapse" d="M80,50 L130,30" />
+    <path id="s9" class="synapse mutating" style="animation-delay: 1.5s;" d="M80,50 L130,70" />
+    <path id="s10" class="synapse" d="M80,80 L130,70" />
+    <path id="s11" class="synapse" d="M80,20 L130,70" />
+
+    <!-- layer 3 -> 4 -->
+    <path id="s12" class="synapse" d="M130,30 L175,50" />
+    <path id="s13" class="synapse mutating" style="animation-delay: 4.5s;" d="M130,70 L175,50" />
+  </g>
+
+  <!-- Neurons -->
+  <g>
+    <circle class="neuron" cx="30" cy="25" r="4" />
+    <circle class="neuron" cx="30" cy="50" r="4" />
+    <circle class="neuron" cx="30" cy="75" r="4" />
+    <circle class="neuron" cx="80" cy="20" r="4" />
+    <circle class="neuron" cx="80" cy="50" r="4" />
+    <circle class="neuron" cx="80" cy="80" r="4" />
+    <circle class="neuron" cx="130" cy="30" r="4" />
+    <circle class="neuron" cx="130" cy="70" r="4" />
+    <circle class="neuron" cx="175" cy="50" r="5" />
+  </g>
+
+  <!-- Membrane potential firing, staggered so the wave sweeps left to right -->
+  <g>
+    <circle class="soma" cx="30" cy="25" r="2.6" style="animation-delay: 0s;" />
+    <circle class="soma" cx="30" cy="50" r="2.6" style="animation-delay: 0s;" />
+    <circle class="soma" cx="30" cy="75" r="2.6" style="animation-delay: 0s;" />
+    <circle class="soma" cx="80" cy="20" r="2.6" style="animation-delay: 0.5s;" />
+    <circle class="soma" cx="80" cy="50" r="2.6" style="animation-delay: 0.5s;" />
+    <circle class="soma" cx="80" cy="80" r="2.6" style="animation-delay: 0.5s;" />
+    <circle class="soma" cx="130" cy="30" r="2.6" style="animation-delay: 1s;" />
+    <circle class="soma" cx="130" cy="70" r="2.6" style="animation-delay: 1s;" />
+    <circle class="soma" cx="175" cy="50" r="3.4" style="animation-delay: 1.4s;" />
+  </g>
+
+  <!-- Spikes propagating along the synapses -->
+  <g>
+    <!-- layer 1 -> 2, wave starts at t=0 -->
+    <circle class="spike" r="1.5">
+      <animate attributeName="opacity" dur="1.5s" begin="0s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.08;0.28;0.34" />
+      <animateMotion dur="1.5s" begin="0s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.33;1" calcMode="linear">
+        <mpath href="#s1" xlink:href="#s1" />
+      </animateMotion>
+    </circle>
+    <circle class="spike" r="1.5">
+      <animate attributeName="opacity" dur="1.5s" begin="0s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.08;0.28;0.34" />
+      <animateMotion dur="1.5s" begin="0s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.33;1" calcMode="linear">
+        <mpath href="#s3" xlink:href="#s3" />
+      </animateMotion>
+    </circle>
+    <circle class="spike" r="1.5">
+      <animate attributeName="opacity" dur="1.5s" begin="0s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.08;0.28;0.34" />
+      <animateMotion dur="1.5s" begin="0s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.33;1" calcMode="linear">
+        <mpath href="#s4" xlink:href="#s4" />
+      </animateMotion>
+    </circle>
+    <circle class="spike" r="1.5">
+      <animate attributeName="opacity" dur="1.5s" begin="0s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.08;0.28;0.34" />
+      <animateMotion dur="1.5s" begin="0s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.33;1" calcMode="linear">
+        <mpath href="#s6" xlink:href="#s6" />
+      </animateMotion>
+    </circle>
+
+    <!-- layer 2 -> 3, wave arrives half a beat later -->
+    <circle class="spike" r="1.5">
+      <animate attributeName="opacity" dur="1.5s" begin="0.5s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.08;0.28;0.34" />
+      <animateMotion dur="1.5s" begin="0.5s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.33;1" calcMode="linear">
+        <mpath href="#s7" xlink:href="#s7" />
+      </animateMotion>
+    </circle>
+    <circle class="spike" r="1.5">
+      <animate attributeName="opacity" dur="1.5s" begin="0.5s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.08;0.28;0.34" />
+      <animateMotion dur="1.5s" begin="0.5s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.33;1" calcMode="linear">
+        <mpath href="#s8" xlink:href="#s8" />
+      </animateMotion>
+    </circle>
+    <circle class="spike" r="1.5">
+      <animate attributeName="opacity" dur="1.5s" begin="0.5s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.08;0.28;0.34" />
+      <animateMotion dur="1.5s" begin="0.5s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.33;1" calcMode="linear">
+        <mpath href="#s10" xlink:href="#s10" />
+      </animateMotion>
+    </circle>
+
+    <!-- layer 3 -> 4 -->
+    <circle class="spike" r="1.5">
+      <animate attributeName="opacity" dur="1.5s" begin="1s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.08;0.28;0.34" />
+      <animateMotion dur="1.5s" begin="1s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.33;1" calcMode="linear">
+        <mpath href="#s12" xlink:href="#s12" />
+      </animateMotion>
+    </circle>
+    <circle class="spike" r="1.5">
+      <animate attributeName="opacity" dur="1.5s" begin="1s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.08;0.28;0.34" />
+      <animateMotion dur="1.5s" begin="1s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.33;1" calcMode="linear">
+        <mpath href="#s13" xlink:href="#s13" />
+      </animateMotion>
+    </circle>
+  </g>
+</svg>

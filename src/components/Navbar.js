@@ -35,7 +35,7 @@ export default function Navbar() {
 
         <div className="nav-links flex items-center">
           <SmartLink href="/#software" className="hover:text-gray-300">
-            Software
+            Projects
           </SmartLink>
           <SmartLink
             href="https://www.github.com/tobias-x"

@@ -81,6 +81,22 @@ function Portfolio({ title, id, items, description }) {
 // Software projects
 const softwareProjects = [
     {
+        name: 'Acoustic Camera',
+        animation: '/animations/acoustic_camera.svg',
+        description: "Wrote the FPGA RTL and did the PCB design for an acoustic camera on a Zynq SoM - a sunflower-spiral mic array doing real-time beamforming to turn sound into a live image."
+    },
+    {
+        name: 'Kwisatz Placer',
+        github_link: "github.com/tobias-x/kwisatz-placer",
+        animation: '/animations/kwisatz_placer.svg',
+        description: "My entry to Partcl's EDA macro placement challenge, 6th out of 129 entries. A GPU placer in PyTorch/Triton that runs 256 XPlace seeds at once and legalizes them all in parallel."
+    },
+    {
+        name: 'Evolutionary SNNs',
+        animation: '/animations/eons.svg',
+        description: "An EONS-style evolutionary algorithm that mutates the topology and weights of spiking neural networks directly, instead of training them with gradient descent."
+    },
+    {
         name: 'Astrodynamics Simulator',
         github_link: "github.com/tobias-x/astrodynamics_sim",
         animation: '/animations/astrodynamics.svg',
@@ -124,10 +140,10 @@ const artworkPieces = [
 export function SoftwarePortfolio() {
     return (
         <Portfolio
-            title="Software"
+            title="Projects"
             id="software"
             items={softwareProjects}
-            description="Most of the software I make is related to trading, because that's what I do for a job. But there's some other stuff as well."
+            description="Most of the projects I work on are related to trading, because that's what I do for a job. But there's some hardware and other stuff as well."
         />
     );
 }
